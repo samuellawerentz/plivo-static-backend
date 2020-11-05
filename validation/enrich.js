@@ -1,5 +1,10 @@
 // Simple Contact Form Spam Filter
 const axios = require('axios').default;
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET'
+  };
 exports.handler = async function(event, context) {
     const email = event.queryStringParameters.email
     const res = await axios.get('https://li.plivo.sh/v2/person/?email=' + email, {
@@ -9,7 +14,8 @@ exports.handler = async function(event, context) {
     });
     const payload = {
         statusCode: 200,
-        body: JSON.stringify(res.data)
+        body: JSON.stringify(res.data),
+        headers
     };
     return payload;
   }
