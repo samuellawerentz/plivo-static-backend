@@ -12,9 +12,10 @@ exports.handler = async function(event, context) {
             'Authorization': 'Basic bWFya2V0aW5nb3BzOm1vZG93bER0Snp4MzE='
           }
     });
+    const isAuthentic = (res.data.person.domain_type === 'personal' && !res.data.person.enrich) ? false : (res.data.person.domain_type && !['disposable', 'malicious', 'blacklisted'].includes(res.data.person.domain_type));
     const payload = {
         statusCode: 200,
-        body: JSON.stringify(res.data),
+        body: JSON.stringify({isAuthentic, ...res.data}),
         headers
     };
     return payload;
