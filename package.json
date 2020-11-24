@@ -4,7 +4,8 @@
   "description": "The project is hosted on Netlify",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.21.0"
+    "axios": "^0.21.0",
+    "qs": "^6.9.4"
   },
   "devDependencies": {},
   "scripts": {
