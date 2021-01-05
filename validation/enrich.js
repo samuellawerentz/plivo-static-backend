@@ -9,7 +9,7 @@ const headers = {
 exports.handler = async function(event, context) {
     const email = event.queryStringParameters.email
     const res = await api.enrichEmail(email);
-    const isAuthentic = (res.data.person.domain_type === 'personal' && !res.data.person.enrich) ? false : (res.data.person.domain_type && !['disposable', 'malicious', 'blacklisted'].includes(res.data.person.domain_type));
+    const isAuthentic = (res.data.person.domain_type && !['disposable', 'malicious', 'blacklisted'].includes(res.data.person.domain_type));
     const payload = {
         statusCode: 200,
         body: JSON.stringify({isAuthentic, ...res.data}),
